@@ -13,6 +13,9 @@ module.exports = function(app) {
         res.render('index', {currentUser: req.user});
     });
 
+    app.get('/addbook', controllers.books.getBook);
+    app.post('/addbook', controllers.books.postBook);
+
     app.get('*', function(req, res) {
         res.render('index', {currentUser: req.user});
     });
