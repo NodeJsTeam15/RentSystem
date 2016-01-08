@@ -1,14 +1,14 @@
 doctype
 html
     head
-        title Telerik File Upload System
+        title
         link(rel="stylesheet" href="/lib/bootstrap-3.2.0/css/bootstrap.min.css")
         link(rel="stylesheet" href="/css/site.css")
     body
         header.nav
         .container
             .navbar-header
-                a.navbar-brand(href="/") File Upload
+                a.navbar-brand(href="/") Books
             .navbar-collapse.collapse
                 ul.nav.navbar-nav
                     li
@@ -18,6 +18,8 @@ html
                             a(href="/profile") #{currentUser.username}
                         li
                             a(href="/logout") Logout
+                        li
+                            a(href="/addbook") Add New Book Offer
                     else
                         li
                             a(href="/register") Register
