@@ -9,6 +9,7 @@ module.exports = {
     },
     postBook: function(req, res, next) {
          var newBookData = req.body;
+         newBookData.user = req.user;
          books.create(newBookData, function(err, user) {
              if (err) {
                  console.log('Failed to register new user: ' + err);

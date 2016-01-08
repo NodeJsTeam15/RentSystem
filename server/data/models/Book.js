@@ -5,7 +5,8 @@ module.exports.init = function() {
     var bookSchema = mongoose.Schema({
         bookname: { type: String, require: true },
         description: String,
-        price:  { type: String, require: true }
+        price:  { type: String, require: true },
+        user: {}
     });
 
     //bookSchema.method({
