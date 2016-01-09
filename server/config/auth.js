@@ -27,5 +27,16 @@ module.exports = {
         else {
             next();
         }
+    },
+    isInRole: function (role) {
+        return function (req, res, next) {
+            if (req.isAuthenticated() && req.user.roles.indexOf(role) >= 0) {
+                next();
+            }
+            else {
+                res.status(401);
+                res.send("Not authorized for this content");
+            }
+        };
     }
 };

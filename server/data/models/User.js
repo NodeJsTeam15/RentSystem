@@ -6,7 +6,10 @@ module.exports.init = function() {
         username: { type: String, require: '{PATH} is required', unique: true },
         salt: String,
         hashPass: String,
-        points: Number
+        roles: [String],
+        city: String,
+        imageUrl: String,
+        postedBooks: [mongoose.model('Book').schema]
     });
 
     userSchema.method({
