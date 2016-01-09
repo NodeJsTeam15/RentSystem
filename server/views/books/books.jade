@@ -1,4 +1,5 @@
 extends shared/layout
+
 block main-content
     .container
         .row
@@ -27,22 +28,22 @@ block main-content
                                 span.glyphicon.glyphicon-chevron-left
                             a.right.carousel-control(href='#carousel-example-generic', data-slide='next')
                                 span.glyphicon.glyphicon-chevron-right
-                //.row
-                //    each book in books
-                //        .col-sm-4.col-lg-4.col-md-4
-                //            .thumbnail
-                //                img(src='http://placehold.it/320x150', alt='')
-                //                .caption
-                //                    h4.pull-right book.price
-                //                    h4
-                //                        a(href='#') book.name
-                //                    p
-                //                        | book.description
-                //                .ratings
-                //                    p.pull-right book.reviews reviews
-                //                    p
-                //                        span.glyphicon.glyphicon-star
-                //                        span.glyphicon.glyphicon-star
-                //                        span.glyphicon.glyphicon-star
-                //                        span.glyphicon.glyphicon-star
-                //                        span.glyphicon.glyphicon-star
+                .row
+                    each book in books
+                        .col-sm-4.col-lg-4.col-md-4
+                            .thumbnail
+                                img(src='http://placehold.it/320x150', alt='')
+                                .caption
+                                    h4.pull-right book.price
+                                    h4
+                                        a(href='#') book.name
+                                    p
+                                        | book.description
+                                .ratings
+                                    p.pull-right book.reviews reviews
+                                    p
+                                        span.glyphicon.glyphicon-star
+                                        span.glyphicon.glyphicon-star
+                                        span.glyphicon.glyphicon-star
+                                        span.glyphicon.glyphicon-star
+                                        span.glyphicon.glyphicon-star

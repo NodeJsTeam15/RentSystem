@@ -1,16 +1,17 @@
 extends ../shared/layout
 block main-content
-   form(method="post")
-      label(for="bookname") Username
-      input(id="bookname" class="form-control" type="text" name="bookname" placeholder="Book name")
-      br
-      label(for="description") Description
-      input(id="description" class="form-control" type="text" name="description" placeholder="Description")
-      br
-      label(for="price") Price
-      input(id="price" class="form-control" type="text" name="price" placeholder="Price")
-      br
-      label(for="contact") Contact(GSM)
-      input(id="contact" class="form-control" type="text" name="contact" placeholder="Contact")
-      br
-      input(type="submit" class="btn btn-lg" value="Add New Book")
+   .container(ng-controller='BooksController as vm')
+      form(method="post")
+         label(for="bookname") Name
+         input(id="bookname" class="form-control" type="text" name="bookname" placeholder="Book name" ng-model='book.name')
+         br
+         label(for="description") Description
+         input(id="description" class="form-control" type="text" name="description" placeholder="Description" ng-model='book.description')
+         br
+         label(for="price") Price
+         input(id="price" class="form-control" type="text" name="price" placeholder="Price" ng-model='book.price')
+         br
+         label(for="contact") Contact(GSM)
+         input(id="contact" class="form-control" type="text" name="contact" placeholder="Contact")
+         br
+         input(class="btn btn-lg" value="Add New Book" ng-click='vm.createBook(book)')

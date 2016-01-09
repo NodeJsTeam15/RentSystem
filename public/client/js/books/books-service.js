@@ -2,7 +2,7 @@
     'use strict';
 
     function books(data){
-        var BOOKS_URL = 'api/books';
+        var BOOKS_URL = 'books';
 
         function getBooks() {
             return data.get(BOOKS_URL);
@@ -13,7 +13,7 @@
         }
 
         function createBook(book) {
-            return data.post(BOOKS_URL, book);
+            return data.post(BOOKS_URL+'/add', book);
         }
 
         return {

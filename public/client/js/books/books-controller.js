@@ -1,16 +1,17 @@
 ﻿(function () {
     'use strict';
 
-    function BooksController(books, identity) {
+    function BooksController(books) {
         var vm = this;
-        vm.identity = identity;
 
-        books.getBooks()
-            .then(function (publicBooks) {
-                vm.projects = publicBooks;
-            });
+        vm.createBook = function (newBook) {
+            books.createBook(newBook)
+                .then(function (result) {
+                    window.location.href = '/';
+                })
+        }
     }
 
     angular.module('myApp.controllers')
-        .controller('BooksController', ['books', 'identity', BooksController])
+        .controller('BooksController', ['books', BooksController])
 }())
