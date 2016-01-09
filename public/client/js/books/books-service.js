@@ -2,18 +2,27 @@
     'use strict';
 
     function books(data){
-        var PROJECTS_URL = 'api/projects';
+        var BOOKS_URL = 'api/books';
 
         function getBooks() {
-            return data.get(PROJECTS_URL);
+            return data.get(BOOKS_URL);
+        }
+
+        function filterBooks(filters) {
+            return data.get(BOOKS_URL, filters);
+        }
+
+        function createBook(book) {
+            return data.post(BOOKS_URL, book);
         }
 
         return {
-            getProjects: getProjects
+            getBooks : getBooks,
+            filterBooks : filterBooks,
+            createBook : createBook
         }
     }
 
     angular.module('myApp.services')
        .factory('books', ['data', books]);
-
 }())

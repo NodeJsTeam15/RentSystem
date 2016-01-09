@@ -9,7 +9,6 @@
             .then(function (publicBooks) {
                 vm.projects = publicBooks;
             });
-        
     }
 
     angular.module('myApp.controllers')
