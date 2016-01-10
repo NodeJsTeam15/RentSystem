@@ -13,7 +13,8 @@ block main-content
                each user in users
                   tr
                      td(class='text-center')
-                        = user.username
+                        a(href="users/" + user._id)
+                           = user.username
                      td(class='text-center')
                         = user.firstName
                      td(class='text-center')

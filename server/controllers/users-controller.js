@@ -66,5 +66,21 @@ module.exports = {
                      res.render(CONTROLLER_NAME +  '/all-users', {users: result, currentUser: req.user});
                 }
             });
+    },
+    getById: function (req, res, next) {
+        User
+            .findOne({ _id: req.params.id })
+            .select('_id username firstName lastName roles')
+            .exec(function (err, result) {
+                if (err) {
+                    res.status(400).send('User could not be found: ' + err);
+                    console.log('User could not be found: ' + err);
+                    return;
+                }
+
+                // res.status(200);
+                // res.send(result);
+                res.render(CONTROLLER_NAME +  '/detailed-user', {viewedUser: result, currentUser: req.user});
+            });
     }
 };

@@ -1,0 +1,23 @@
+extends ../shared/layout
+block main-content
+   div(class="panel panel-primary")
+      div(class="panel-heading")
+         h3(class="panel-title text-center") Profile:
+      div(class="panel-body")
+         table(class="table table-bordered")
+            tr
+               td(class='text-center') ID
+               td(class='text-center')
+                  = viewedUser._id
+            tr
+               td(class='text-center') Username
+               td(class='text-center')
+                  = viewedUser.username
+            tr
+               td(class='text-center') First Name
+               td(class='text-center')
+                  = viewedUser.firstName
+            tr
+               td(class='text-center') Last Name
+               td(class='text-center')
+                  = viewedUser.lastName
