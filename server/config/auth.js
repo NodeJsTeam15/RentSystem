@@ -52,8 +52,15 @@ module.exports = {
         };
     },
     isAdminOrCurrentUser: function(req, res, next){
-        console.log('isAdminOrCurrentUser')
-        if ((req.isAuthenticated() && req.user._id === req.params.id)  || (req.user != undefined && req.user.roles.indexOf('admin') >= 0)) {
+        var currentUser,
+            queryString;
+
+        if(req.isAuthenticated()) {
+            currentUser = req.user._id.toString();
+            queryString = req.params.id.toString();
+        }
+
+        if ((req.isAuthenticated() && currentUser.localeCompare(queryString) === 0) || (req.user != undefined && req.user.roles.indexOf('admin') >= 0)) {
             next();
         }
         else {
