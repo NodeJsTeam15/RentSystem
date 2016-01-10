@@ -1,0 +1,20 @@
+extends ../shared/layout
+block main-content
+   div(class="panel panel-primary")
+      div(class="panel-heading")
+         h3(class="panel-title text-center") Profile:
+      div(class="panel-body")
+         form(method="put")
+            label(for="id") ID:
+            input(id="id" class="form-control" type="text" name="id" value=viewedUser._id disabled="disabled")
+            br
+            label(for="username") Username:
+            input(id="username" class="form-control" type="text" name="userName" value=viewedUser.username disabled="disabled")
+            br
+            label(for="first-name") First Name
+            input(id="first-name" class="form-control" type="text" name="firstName" value=viewedUser.firstName)
+            br
+            label(for="first-name") Last Name
+            input(id="first-name" class="form-control" type="text" name="lastName" value=viewedUser.lastName)
+            br
+            input(type="submit" class="btn btn-lg" value="Update")

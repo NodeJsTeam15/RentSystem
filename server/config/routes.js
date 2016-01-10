@@ -13,8 +13,9 @@ module.exports = function(app) {
     app.get('/users', auth.isInRole('admin'), controllers.users.getAllUsers);
        // .put(auth.isAuthenticated, controllers.users.updateUser);
 
-    app.get('/users/:id', controllers.users.getById);
-        // .post( auth.isInRole('admin'), controllers.users.updateByAdmin)
+    app.get('/users/:id', auth.isAdminOrCurrentUser, controllers.users.getById)
+    app.get('/users/:id/edit',auth.isAdminOrCurrentUser, controllers.users.getByIdForEdit);
+    app.put('/users/:id/edit', controllers.users.updateByAdmin)
         // .delete( auth.isInRole('admin'), controllers.users.deleteUser)
         // .put( auth.isInRole('admin'), controllers.users.makeAdmin);
 

@@ -78,9 +78,42 @@ module.exports = {
                     return;
                 }
 
-                // res.status(200);
-                // res.send(result);
                 res.render(CONTROLLER_NAME +  '/detailed-user', {viewedUser: result, currentUser: req.user});
             });
+    },
+    getByIdForEdit: function (req, res, next) {
+        User
+            .findOne({ _id: req.params.id })
+            .select('_id username firstName lastName roles')
+            .exec(function (err, result) {
+                if (err) {
+                    res.status(400).send('User could not be found: ' + err);
+                    console.log('User could not be found: ' + err);
+                    return;
+                }
+
+                res.render(CONTROLLER_NAME +  '/detailed-user-for-edit', {viewedUser: result, currentUser: req.user});
+            });
+    },
+    updateByAdmin: function (req, res, next) {
+
+        var updatedUserData = {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName
+        };
+
+        // if (req.body.password && req.body.password.length > 5) {
+        //     updatedUserData.salt = encryption.generateSalt();
+        //     updatedUserData.hashPass = encryption.generateHashedPassword(updatedUserData.salt, req.body.password);
+        // }
+
+        User.update({ _id: req.body._id }, updatedUserData, function (err, numberAffectedRows) {
+            if (err) {
+                res.status(400).send('Error updating user data: ' + err);
+                return;
+            }
+            res.status(200).send('User updated successfully');
+            res.render(CONTROLLER_NAME +  '/');
+        });
     }
 };

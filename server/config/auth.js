@@ -50,5 +50,15 @@ module.exports = {
                 res.send("Not authorized for this content");
             }
         };
+    },
+    isAdminOrCurrentUser: function(req, res, next){
+        console.log('isAdminOrCurrentUser')
+        if ((req.isAuthenticated() && req.user._id === req.params.id)  || (req.user != undefined && req.user.roles.indexOf('admin') >= 0)) {
+            next();
+        }
+        else {
+            res.send({success: false}); // TODO:
+            // res.redirect('/login');
+        }
     }
 };
