@@ -6,7 +6,12 @@ module.exports.init = function() {
         username: { type: String, require: '{PATH} is required', unique: true },
         salt: String,
         hashPass: String,
-        points: Number
+        roles: [String],
+        city: String,
+        firstName: String,
+        lastName: String,
+        imageUrl: String,
+        postedBooks: []
     });
 
     userSchema.method({

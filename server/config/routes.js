@@ -9,6 +9,15 @@ module.exports = function(app) {
     app.post('/login', auth.login);
     app.get('/logout', auth.logout);
 
+    // Users
+    app.get('/users', auth.isInRole('admin'), controllers.users.getAllUsers);
+       // .put(auth.isAuthenticated, controllers.users.updateUser);
+
+    app.get('/users/:id', controllers.users.getById);
+        // .post( auth.isInRole('admin'), controllers.users.updateByAdmin)
+        // .delete( auth.isInRole('admin'), controllers.users.deleteUser)
+        // .put( auth.isInRole('admin'), controllers.users.makeAdmin);
+
     app.get('/', function(req, res) {
         res.render('index', {currentUser: req.user});
     });

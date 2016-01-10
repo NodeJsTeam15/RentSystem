@@ -20,6 +20,10 @@ html
                             a(href="/logout") Logout
                         li
                             a(href="/addbook") Add New Book Offer
+                        if (currentUser.roles.indexOf('admin') > -1)
+                            li
+                                a(href="/users") Users
+
                     else
                         li
                             a(href="/register") Register
@@ -34,6 +38,6 @@ html
 
         footer
             p.text-center
-                | &copy; Telerik Academy 2014
+                | &copy; Telerik Academy 2016
 
         include scripts

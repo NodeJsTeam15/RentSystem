@@ -5,14 +5,15 @@ var CONTROLLER_NAME = 'books';
 
 module.exports = {
     getBook: function(req, res, next) {
-        res.render(CONTROLLER_NAME + '/addbook')
+        res.render(CONTROLLER_NAME + '/addbook', {currentUser: req.user})
     },
     postBook: function(req, res, next) {
          var newBookData = req.body;
          newBookData.user = req.user;
+
          books.create(newBookData, function(err, user) {
              if (err) {
-                 console.log('Failed to register new user: ' + err);
+                 console.log('Failed to create new book: ' + err);
                  return;
              }
 

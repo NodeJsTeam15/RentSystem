@@ -1,0 +1,23 @@
+extends ../shared/layout
+block main-content
+   div(class="panel panel-primary")
+      div(class="panel-heading")
+         h3(class="panel-title text-center") Users
+      div(class="panel-body")
+         table(class="table table-bordered")
+            tr
+               th(class='text-center') Username
+               th(class='text-center') First Name
+               th(class='text-center') Last Name
+               th(class='text-center') Id
+               each user in users
+                  tr
+                     td(class='text-center')
+                        a(href="users/" + user._id)
+                           = user.username
+                     td(class='text-center')
+                        = user.firstName
+                     td(class='text-center')
+                        = user.lastName
+                     td(class='text-center')
+                        = user._id
