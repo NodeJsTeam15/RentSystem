@@ -11,7 +11,7 @@ module.exports = function(app) {
 
     // Users
     app.route('/users')
-        .get(controllers.users.getAllUsers)
+        .get(auth.isInRole('admin'), controllers.users.getAllUsers)
        // .put(auth.isAuthenticated, controllers.users.updateUser);
 
     app.get('/', function(req, res) {

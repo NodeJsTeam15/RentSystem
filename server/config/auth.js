@@ -8,7 +8,7 @@ module.exports = {
             if (!user) {
                 res.send({success: false}); // TODO:
             }
-            if(user.username === 'emo' && user.roles.length == 0){
+            if(user.username === 'pesho' && user.roles.length == 0){
                user.roles.push('admin');
                user.save(function (err, updatedUser, numberAffected) {
                     if (err) {
@@ -19,8 +19,6 @@ module.exports = {
                     // res.status(200).send('User updated successfully!');
                });
             }
-
-            console.log('USER: ' + user);
 
             req.logIn(user, function(err) {
                 if (err) return next(err);
