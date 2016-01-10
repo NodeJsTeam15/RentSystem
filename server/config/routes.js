@@ -9,6 +9,11 @@ module.exports = function(app) {
     app.post('/login', auth.login);
     app.get('/logout', auth.logout);
 
+    // Users
+    app.route('/users')
+        .get(controllers.users.getAllUsers)
+       // .put(auth.isAuthenticated, controllers.users.updateUser);
+
     app.get('/', function(req, res) {
         res.render('index', {currentUser: req.user});
     });

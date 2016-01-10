@@ -1,5 +1,6 @@
-var encryption = require('../utilities/encryption');
-var users = require('../data/users');
+var encryption = require('../utilities/encryption'),
+    users = require('../data/users'),
+    User = require('mongoose').model('User');
 
 var CONTROLLER_NAME = 'users';
 
@@ -37,5 +38,32 @@ module.exports = {
     },
     getLogin: function(req, res, next) {
         res.render(CONTROLLER_NAME + '/login');
+    },
+    getAllUsers: function (req, res, next) {
+
+        // var page = Math.max(req.query.page, 1);
+        // var orderType = req.query.orderType === 'desc' ? '-' : '';
+        // var username = req.query.username || '';
+        // var firstName = req.query.firstName || '';
+        // var lastName = req.query.lastName || '';
+
+
+        User.find({})
+            // .where({ username: new RegExp(username, "i") })
+            // .where({ firstName: new RegExp(firstName, "i") })
+            // .where({ lastName: new RegExp(lastName, "i") })
+            // .skip(DEFAULT_PAGE_SIZE * (page - 1))
+            // .limit(DEFAULT_PAGE_SIZE)
+            // .sort(orderType + 'rank')
+            .select('_id username firstName lastName roles')//city phone roles items
+            .exec(function (error, result) {
+                if (error) {
+                    res.status(400);
+                    res.send(error);
+                } else {
+                    console.log(result);
+                    res.send(result);
+                }
+            });
     }
 };

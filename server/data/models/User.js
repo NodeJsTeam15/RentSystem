@@ -8,8 +8,10 @@ module.exports.init = function() {
         hashPass: String,
         roles: [String],
         city: String,
+        firstName: String,
+        lastName: String,
         imageUrl: String,
-        postedBooks: [mongoose.model('Book').schema]
+        postedBooks: []
     });
 
     userSchema.method({
