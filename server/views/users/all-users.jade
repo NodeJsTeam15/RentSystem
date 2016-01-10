@@ -1,0 +1,18 @@
+extends ../shared/layout
+block main-content
+   table
+      tr
+         th(class='text-center') Username
+         th(class='text-center') First Name
+         th(class='text-center') Last Name
+         th(class='text-center') Id
+         each user in users
+            tr
+               td(class='text-center')
+                  = user.username
+               td(class='text-center')
+                  = user.firstName
+               td(class='text-center')
+                  = user.lastName
+               td(class='text-center')
+                  = user._id

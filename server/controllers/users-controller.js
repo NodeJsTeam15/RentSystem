@@ -62,7 +62,7 @@ module.exports = {
                     res.send(error);
                 } else {
                     console.log(result);
-                    res.send(result);
+                     res.render(CONTROLLER_NAME +  '/all-users', {users: result});
                 }
             });
     }
