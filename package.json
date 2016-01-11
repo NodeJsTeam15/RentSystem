@@ -15,6 +15,7 @@
     "kerberos": "0.0.17",
     "mongodb": "^2.1.2",
     "mongoose": "^4.3.4",
+    "mongoose-paginate": "^5.0.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0"
   }

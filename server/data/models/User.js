@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
-    encryption = require('../../utilities/encryption');
+    encryption = require('../../utilities/encryption'),
+    mongoosePaginate = require('mongoose-paginate');
 
 module.exports.init = function() {
     var userSchema = mongoose.Schema({
@@ -13,6 +14,8 @@ module.exports.init = function() {
         imageUrl: String,
         postedBooks: []
     });
+
+    userSchema.plugin(mongoosePaginate);
 
     userSchema.method({
         authenticate: function(password) {

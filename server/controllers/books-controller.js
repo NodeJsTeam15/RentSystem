@@ -1,5 +1,8 @@
-var encryption = require('../utilities/encryption');
-var books = require('../data/books');
+var encryption = require('../utilities/encryption'),
+    books = require('../data/books'),
+    Book = require('mongoose').model('Book'),
+    User = require('mongoose').model('User'),
+    mongoosePaginate = require('mongoose-paginate');
 
 var CONTROLLER_NAME = 'books';
 
@@ -27,5 +30,39 @@ module.exports = {
                  }
              })
          });
+    },
+    getBooks: function (req, res, next) {
+        var customQuery = req.query.userId ? {user: req.query.userId} : {};
+
+        if (req.query.category) {
+            customQuery['category'] = req.query.category;
+        }
+
+        var page = req.query.page ? req.query.page : 1;
+        var limit = req.query.pageSize ? req.query.pageSize : 10;
+        var sortBy = {};
+        var type = req.query.type;
+
+        if (req.query.sortBy) {
+            sortBy[req.query.sortBy] = type;
+        }
+
+        debugger;
+        Book.paginate({}, {page: 1, limit: 10}, function (err, result) {
+            if (err) {
+                console.log('Products could not be loaded: ' + err);
+            }
+
+            res.render('books/books', {currentUser: req.user, books: result.docs});
+        })
+    },
+    getLatestBooks: function (req, res, next) {
+        Book.paginate({}, {page: 1, limit: 10}, function (err, result) {
+            if (err) {
+                console.log('Books could not be loaded: ' + err);
+            }
+
+            res.render('index', {currentUser: req.user, collection: result.docs.reverse()});
+        })
     }
 }

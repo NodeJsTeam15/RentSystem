@@ -1,19 +1,18 @@
 ﻿(function () {
     'use strict';
 
-    function books(data){
-        var PROJECTS_URL = 'api/projects';
+    function booksService(data) {
+        var BOOKS_URL = 'admin';
 
-        function getBooks() {
-            return data.get(PROJECTS_URL);
+        function createBook(book) {
+            return data.post(BOOKS_URL + '/books/add', book);
         }
 
         return {
-            getProjects: getProjects
+            createBook: createBook
         }
     }
 
     angular.module('myApp.services')
-       .factory('books', ['data', books]);
-
-}())
+        .factory('booksService', ['data', booksService])
+}());
