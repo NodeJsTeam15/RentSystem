@@ -1,11 +1,13 @@
 (function () {
     'use strict';
 
-    function BooksCreateController($location, productsService) {
+    function BooksCreateController(booksService) {
         var vm = this;
 
         vm.createBook = function (newBook) {
-            booksService.createProduct(newBook)
+            console.log(newBook);
+            console.log(123123123);
+            booksService.createBook(newBook)
                 .then(function (result) {
                     window.location.href = '/';
                 })
@@ -13,5 +15,5 @@
     }
 
     angular.module('myApp.controllers')
-        .controller('BooksCreateController', ['$location', 'booksService', BooksCreateController]);
+        .controller('BooksCreateController', ['booksService', BooksCreateController]);
 }());

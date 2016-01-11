@@ -4,7 +4,7 @@ html
         title
         link(rel="stylesheet" href="/lib/bootstrap-3.2.0/css/bootstrap.min.css")
         link(rel="stylesheet" href="/css/site.css")
-    body
+    body(ng-app="myApp")
         header.nav
         .container
             .navbar-header
@@ -21,7 +21,7 @@ html
                         li
                             a(href="/logout") Logout
                         li
-                            a(href="/addbook") Add New Book Offer
+                            a(href="/books/add") Add New Book Offer
                         if (currentUser.roles.indexOf('admin') > -1)
                             li
                                 a(href="/users") Users

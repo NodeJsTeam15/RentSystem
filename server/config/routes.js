@@ -19,6 +19,7 @@ module.exports = function(app) {
         // .delete( auth.isInRole('admin'), controllers.users.deleteUser)
         // .put( auth.isInRole('admin'), controllers.users.makeAdmin);
     // Books
+    console.log(controllers);
     app.get('/books', controllers.books.getBooks);
 
     app.get('/cart', controllers.users.getCart);
@@ -27,8 +28,8 @@ module.exports = function(app) {
         res.render('index', {currentUser: req.user});
     });
 
-    app.get('/addbook', auth.isAuthenticated, controllers.books.getBook);
-    app.post('/addbook', auth.isAuthenticated, controllers.books.postBook);
+    app.get('/books/add', auth.isAuthenticated, controllers.books.getAdd);
+    app.post('/books/add', auth.isAuthenticated, controllers.books.createBook);
 
     app.get('*', function(req, res) {
         res.render('index', {currentUser: req.user});
