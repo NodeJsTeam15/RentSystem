@@ -12,7 +12,9 @@ module.exports.init = function() {
         firstName: String,
         lastName: String,
         imageUrl: String,
-        postedBooks: []
+        books: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Book' }] ,
+        cart: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Book' }],
+        orders: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }]
     });
 
     userSchema.plugin(mongoosePaginate);

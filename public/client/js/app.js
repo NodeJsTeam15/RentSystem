@@ -20,6 +20,6 @@
 
     angular.module('myApp.services', []);
     angular.module('myApp.controllers', []);
-    angular.module('myApp', ['ngRoute', 'ngCookies', 'myApp.services', 'myApp.controllers'])
-        .constant('baseServiceUrl', 'http://localhost:3000/');
+    angular.module('myApp', ['ngCookies', 'myApp.services', 'myApp.controllers'])
+        .constant('baseServiceUrl', 'http://localhost:3000');
 }());

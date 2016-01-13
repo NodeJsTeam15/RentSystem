@@ -1,4 +1,5 @@
-var Book = require('mongoose').model('Book');
+var Book = require('mongoose').model('Book'),
+    mongoose=require('mongoose');
 
 module.exports = {
     create: function(book, callback) {

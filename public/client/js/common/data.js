@@ -1,19 +1,17 @@
 ﻿(function () {
     'use strict';
     
-    function data($http, $q, authorization, notifier, baseServiceUrl) {
+    function data($http, $q, baseServiceUrl) {
 
         function get(url, queryParams) {
             var defered = $q.defer();
 
-            var authHeader = authorization.getAuthorizationHeader();
 
-            $http.get(baseServiceUrl + '/' + url, { params: queryParams, headers: authHeader })
+            $http.get(baseServiceUrl + '/' + url, { params: queryParams })
                 .then(function (response) {
                     defered.resolve(response.data);
                 }, function (error) {
                     error = getErrorMessage(error);
-                    notifier.error(error);
                     defered.reject(error);
                 });
 
@@ -23,14 +21,12 @@
         function post(url, postData) {
             var defered = $q.defer();
 
-            var authHeader = authorization.getAuthorizationHeader();
-
-            $http.post(baseServiceUrl + '/' + url, postData, { headers: authHeader })
+            $http.post(baseServiceUrl + '/' + url, postData)
                 .then(function (response) {
+                    console.log(response);
                     defered.resolve(response.data);
                 }, function (error) {
                     error = getErrorMessage(error);
-                    notifier.error(error);
                     defered.reject(error);
                 });
 
@@ -61,5 +57,5 @@
     }
 
     angular.module('myApp.services')
-        .factory('data', ['$http', '$q', 'authorization', 'notifier', 'baseServiceUrl', data])
-}())
+        .factory('data', ['$http', '$q', 'baseServiceUrl', data])
+}());

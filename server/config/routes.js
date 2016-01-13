@@ -22,14 +22,16 @@ module.exports = function(app) {
     console.log(controllers);
     app.get('/books', controllers.books.getBooks);
 
-    app.get('/cart', controllers.users.getCart);
+    app.get('/cart',  controllers.users.getCart);
+    app.get('/cart/add', controllers.users.getAddCartConfirmation);
 
-    app.get('/', function(req, res) {
-        res.render('index', {currentUser: req.user});
-    });
+    app.post('/cart/add', controllers.users.addItemToCart);
+    app.post('/cart/remove', controllers.users.removeItemFromCart);
 
-    app.get('/books/add', auth.isAuthenticated, controllers.books.getAdd);
-    app.post('/books/add', auth.isAuthenticated, controllers.books.createBook);
+    app.get('/', controllers.books.getLatestBooks);
+
+    app.get('/books/add', controllers.books.getAdd);
+    app.post('/books/add', controllers.books.createBook);
 
     app.get('*', function(req, res) {
         res.render('index', {currentUser: req.user});

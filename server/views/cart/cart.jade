@@ -11,12 +11,6 @@ block main-content
                 th Price
                 th
             tbody
-                if (cart.length == 0)
-                    tr
-                        td
-                        td The Cart is Empty
-                        td
-                        td
                 each book in cart
                     tr
                         td= book.category
@@ -29,4 +23,4 @@ block main-content
                     td
                     td= cart.total
                     td
-        a.btn.btn-primary.pull-right Checkout
+                        a.btn.btn-primary.pull-right Checkout

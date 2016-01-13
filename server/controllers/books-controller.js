@@ -12,7 +12,7 @@ module.exports = {
     createBook: function(req, res, next) {
          var newBookData = req.body;
          newBookData.user = req.user;
-         console.log(newBookData);
+        console.log(newBookData);
          books.create(newBookData, function(err, user) {
              if (err) {
                  console.log('Failed to create a new book: ' + err);
@@ -46,27 +46,29 @@ module.exports = {
             sortBy[req.query.sortBy] = type;
         }
 
-        console.log("123123");
-        console.log(customQuery);
         //Book.paginate(customQuery, {page: page, limit: limit, sort: sortBy}, function (err, result) {
         //    if (err) {
         //        console.log('Books could not be loaded: ' + err);
         //    }
         //
         //    res.render('books/books', {currentUser: req.user, books: result.docs});
-        //})
+        //});
 
         Book.find({}, function(err, books) {
             res.render('books/books', {currentUser: req.user, books: books});
         });
     },
     getLatestBooks: function (req, res, next) {
-        Book.paginate({}, {page: 1, limit: 10}, function (err, result) {
-            if (err) {
-                console.log('Books could not be loaded: ' + err);
-            }
-
-            res.render('index', {currentUser: req.user, collection: result.docs.reverse()});
-        })
+        //Book.paginate({}, {page: 1, limit: 10}, function (err, result) {
+        //    if (err) {
+        //        console.log('Books could not be loaded: ' + err);
+        //    }
+        //
+        //    res.render('index', {currentUser: req.user, books: result.docs.reverse()});
+        //})
+        Book.find({}, function(err, books) {
+            console.log(books);
+            res.render('index', {currentUser: req.user, books: books});
+        });
     }
-}
+};

@@ -2,14 +2,13 @@
     'use strict';
 
     function cartService(data) {
-        var PRODUCTS_URL = 'admin';
 
         function addToCart(productId) {
-            return data.post(PRODUCTS_URL + '/cart/add', productId);
+            return data.post('/cart/add', productId);
         }
 
         function removeFromCart(productId) {
-            return data.post(PRODUCTS_URL + '/cart/remove', productId);
+            return data.post('/cart/remove', productId);
         }
 
         return {

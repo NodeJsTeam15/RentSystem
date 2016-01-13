@@ -1,11 +1,11 @@
 ﻿(function () {
     'use strict';
 
-    function booksService(data) {
+    function books(data) {
 
         function createBook(book) {
             console.log(book);
-            return data.post('/books/add', book);
+            return data.post('books/add', book);
         }
 
         return {
@@ -14,5 +14,5 @@
     }
 
     angular.module('myApp.services')
-        .factory('booksService', ['data', booksService])
+        .factory('books', ['data', books])
 }());

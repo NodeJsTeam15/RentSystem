@@ -1,5 +1,6 @@
 var encryption = require('../utilities/encryption'),
     users = require('../data/users'),
+    books = require('../data/books'),
     User = require('mongoose').model('User');
 
 var CONTROLLER_NAME = 'users';
@@ -108,13 +109,13 @@ module.exports = {
         if (!req.user) {
             res.redirect('/');
         } else {
-            var product = req.query.itemId ? {id: req.query.itemId} : {};
-            productsData.getProductById(product.id, function (err, product) {
+            var book = req.query.itemId ? {id: req.query.itemId} : {};
+            books.getBookById(book.id, function (err, book) {
                 if (err) {
-                    console.log('Product could not be loaded: ' + err);
+                    console.log('Book could not be loaded: ' + err);
                 }
-                var collection = [product];
-                res.render('cart/addToCart', {currentUser: req.user, collection: collection});
+                var books = [book];
+                res.render('cart/addToCart', {currentUser: req.user, books: books});
             });
         }
     },
