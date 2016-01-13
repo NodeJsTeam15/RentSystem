@@ -33,7 +33,7 @@ module.exports = function(app) {
     app.get('/books/add', controllers.books.getAdd);
     app.post('/books/add', controllers.books.createBook);
 
-    // app.get('*', function(req, res) {
-    //     res.render('index', {currentUser: req.user});
-    // });
+    //app.get('*', function(req, res) {
+    //    res.render('index', {currentUser: req.user});
+    //});
 };

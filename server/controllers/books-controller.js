@@ -12,7 +12,7 @@ module.exports = {
     createBook: function(req, res, next) {
          var newBookData = req.body;
          newBookData.user = req.user;
-        console.log(newBookData);
+
          books.create(newBookData, function(err, user) {
              if (err) {
                  console.log('Failed to create a new book: ' + err);
@@ -40,13 +40,11 @@ module.exports = {
 
         var page = req.query.page ? req.query.page : 1;
         var limit = req.query.pageSize ? req.query.pageSize : 10;
-        var sortBy = {};
-        var type = req.query.type;
 
-        if (req.query.sortBy) {
-            sortBy[req.query.sortBy] = type;
-        }
 
+        var sortByProperty = req.query.sortBy ? req.query.sortBy: 'price';
+0
+        var sortDir = req.query.type === 'asc' ? 1 : -1;
         //Book.paginate(customQuery, {page: page, limit: limit, sort: sortBy}, function (err, result) {
         //    if (err) {
         //        console.log('Books could not be loaded: ' + err);
@@ -55,9 +53,24 @@ module.exports = {
         //    res.render('books/books', {currentUser: req.user, books: result.docs});
         //});
 
-        Book.find({}, function(err, books) {
-            res.render('books/books', {currentUser: req.user, books: books});
-        });
+        var sortObject = {};
+        var stype = sortByProperty;
+        var sdir = sortDir;
+        sortObject[stype] = sdir;
+        Book
+            .find({}).sort(sortObject).skip(+limit * (page - 1)).limit(+limit)
+            .exec(function (err, books) {
+                if (err) {
+                    console.log('Get all books failed: ' + err);
+                    return;
+                }
+
+                res.render('books/books', {books: books, currentUser: req.user});
+            });
+
+        // Book.find({}, function(err, books) {
+        //     res.render('books/books', {currentUser: req.user, books: books});
+        // });
     },
     getLatestBooks: function (req, res, next) {
         //Book.paginate({}, {page: 1, limit: 10}, function (err, result) {
@@ -68,7 +81,7 @@ module.exports = {
         //    res.render('index', {currentUser: req.user, books: result.docs.reverse()});
         //})
         Book.find({}, function(err, books) {
-            console.log(books);
+            // console.log(books);
             res.render('index', {currentUser: req.user, books: books});
         });
     }
