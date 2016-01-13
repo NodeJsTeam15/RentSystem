@@ -44,7 +44,7 @@ module.exports = {
 
 
         var sortByProperty = req.query.sortBy ? req.query.sortBy: 'price';
-0
+
         var sortDir = req.query.type === 'asc' ? 1 : -1;
         //Book.paginate(customQuery, {page: page, limit: limit, sort: sortBy}, function (err, result) {
         //    if (err) {

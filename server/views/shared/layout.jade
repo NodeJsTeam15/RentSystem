@@ -2,37 +2,38 @@ doctype
 html
     head
         title
-        link(rel="stylesheet" href="/lib/bootstrap-3.2.0/css/bootstrap.min.css")
+        link(rel="stylesheet" href="/lib/bootstrap-theme/bootstrap.css")
         link(rel="stylesheet" href="/css/site.css")
     body(ng-app="myApp" ng-cloak)
-        header.nav
-        .container
-            .navbar-header
-                a.navbar-brand(href="/") Books
-            .navbar-collapse.collapse
-                ul.nav.navbar-nav
-                    li
-                        a(href="/") Home
-                    if (currentUser)
-                        li
-                            a(href="/books") Books
-                        li
-                            a(href="/profile") #{currentUser.username}
-                        li
-                            a(href="/logout") Logout
-                        li
-                            a(href="/books/add") Add New Book Offer
-                        li
-                            a(href="/cart") Cart
-                        if (currentUser.roles.indexOf('admin') > -1)
+        nav(class="navbar navbar-default")
+            div(class="container-fluid")
+                div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
+                    ul(class="nav navbar-nav")
+                        li(class="active")
+                            a(href="/") Home
+                        if (currentUser)
                             li
-                                a(href="/users") Users
+                                a(href="/books/add") Add New Book Offer
+                            li
+                                a(href="/cart") Cart
+                            if (currentUser.roles.indexOf('admin') > -1)
+                                li
+                                    a(href="/users") Users
+                    ul(class="nav navbar-nav navbar-right")
+                        if (currentUser)
+                            li
+                                a(href="/profile") #{currentUser.username}
+                            li
+                                a(href="/logout") Logout
+                        else
+                            li
+                                a(href="/register") Register
+                            li
+                                a(href="/login") Login
 
-                    else
-                        li
-                            a(href="/register") Register
-                        li
-                            a(href="/login") Login
+
+
+
 
         .container(ng-view)
             if (errorMessage)
