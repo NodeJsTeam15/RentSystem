@@ -1,0 +1,34 @@
+extends ../shared/layout
+block main-content
+    div(class='container' ng-controller='CartController as vm')
+        if(inCart)
+            h1 Are you sure you want to remove this book from your cart?
+        else
+            h1 Book details
+        table.table.table-stripped.table-hover
+            thead
+            tr
+                th Category
+                th Name
+                th Price
+                if(book.description)
+                    th Description
+            tbody
+                tr
+                    td(style='vertical-align:middle')= book.category
+                    td(style='vertical-align:middle')= book.name
+                    td(style='vertical-align:middle')= book.price
+                    if(book.description)
+                        td(style='vertical-align:middle')= book.description
+        if(book.image)
+            div(style="text-align:center")
+                img(src=book.image style="width:400px" class='img-rounded')
+                if(currentUser)
+        div(class='col-md-10 col-md-offset-1')
+            a.btn.btn-primary.pull-left(href='/books') Back to the shop
+            if(currentUser)
+                if(!inCart)
+                    div(class='btn btn-primary pull-right',ng-click='vm.addToCart()') Add To Cart
+                if(inCart)
+                    a.btn.btn-primary.pull-left(href='/cart') Back to the cart
+                    div(style='vertical-align:middle' class='btn btn-primary pull-right',ng-click='vm.removeFromCart()') Remove From Cart

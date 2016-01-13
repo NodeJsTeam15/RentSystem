@@ -12,6 +12,7 @@
             var itemToAdd = {
                 itemId: itemId
             };
+            console.log(itemToAdd);
             cartService.addToCart(itemToAdd)
                 .then(function (result) {
                     console.log('added to cart!');
@@ -25,6 +26,7 @@
             var itemToRemove = {
                 itemId: itemId
             };
+            console.log(itemToRemove);
             cartService.removeFromCart(itemToRemove)
                 .then(function (result) {
                     console.log('removed from cart!');

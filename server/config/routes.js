@@ -27,6 +27,7 @@ module.exports = function(app) {
 
     app.post('/cart/add', controllers.users.addItemToCart);
     app.post('/cart/remove', controllers.users.removeItemFromCart);
+    app.get('/cart/remove', controllers.users.getRemoveFromCartConfirmation);
 
     app.get('/', controllers.books.getLatestBooks);
 
