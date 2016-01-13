@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 module.exports.init = function() {
     var bookSchema = mongoose.Schema({
-        name: { type: String, require: true },
+        bookname: { type: String, require: true },
         description: String,
         price:  { type: String, require: true },
         category: String,

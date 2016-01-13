@@ -13,9 +13,7 @@ block main-content
             each book in books
                 tr
                     td= book.category
-                    td= book.name
+                    td= book.bookname
                     td= book.price
-                    td
-                        img(src=book.image class='image_table img-rounded')
                     td
                         a(class='btn btn-sm',href='/cart/add?itemId='+book.id) Add To Cart

@@ -25,7 +25,8 @@ module.exports = {
                      return res.send({reason: err.toString()}); // TODO
                  }
                  else {
-                     res.redirect('/');
+                     console.log('here')
+                     res.redirect({currentUser: req.user}, '/');
                  }
              })
          });
