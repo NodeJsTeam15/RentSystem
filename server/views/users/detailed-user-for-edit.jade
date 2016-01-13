@@ -1,0 +1,32 @@
+extends ../shared/layout
+block main-content
+   .container
+      div(class='col-md-8 col-md-offset-2')
+         form(class='form-horizontal' method="post")
+            fieldset
+               legend
+                  | Profile
+               .form-group
+                  label(class='col-md-2 control-label', for='user-id')
+                     | USER ID
+                  .col-md-10
+                     input(type='text', class='form-control', id='user-id' disabled="disabled", value=viewedUser._id)
+               .form-group
+                  label(class='col-md-2 control-label', for='username')
+                     | USER ID
+                  .col-md-10
+                     input(type='text', class='form-control', id='username' disabled="disabled", value=viewedUser.username)
+               .form-group
+                  label(class='col-md-2 control-label', for='first-name')
+                     | First Name
+                  .col-md-10
+                     input(type='text', class='form-control', id='first-name', value=viewedUser.firstName)
+               .form-group
+                  label(class='col-md-2 control-label', for='last-name')
+                     | Last Name
+                  .col-md-10
+                     input(type='text', class='form-control', id='last-name', value=viewedUser.lastName)
+               .form-group
+                  div(class='col-md-10 col-md-offset-2')
+                     button(class='btn btn-primary', type='reset') Reset
+                     button(class='btn btn-primary pull-right') Submit
