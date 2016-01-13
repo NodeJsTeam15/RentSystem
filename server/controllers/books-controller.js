@@ -19,17 +19,18 @@ module.exports = {
                  return;
              }
 
-             req.logIn(user, function(err) {
-                 if (err) {
-                     res.status(400);
-                     return res.send({reason: err.toString()}); // TODO
-                 }
-                 else {
-                     console.log('here')
-                     res.redirect({currentUser: req.user}, '/');
-                 }
-             })
+             // req.logIn(user, function(err) {
+             //     if (err) {
+             //         res.status(400);
+             //         return res.send({reason: err.toString()}); // TODO
+             //     }
+             //     else {
+             //         res.redirect('/');
+             //     }
+             // })
          });
+
+         res.redirect('/');
     },
     getBooks: function (req, res, next) {
         var customQuery = req.query.userId ? {user: req.query.userId} : {};

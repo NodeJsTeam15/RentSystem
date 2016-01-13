@@ -50,5 +50,27 @@ module.exports = {
                 res.send("Not authorized for this content");
             }
         };
+    },
+    isAdminOrCurrentUser: function(req, res, next){
+    var currentUser,
+        queryString;
+
+    console.log('here');
+    if(req.isAuthenticated()) {
+        currentUser = req.user._id.toString();
+        queryString = req.params.id.toString();
+
+        console.log('current user ' + currentUser);
+        console.log('query string ' + queryString);
+        console.log(currentUser.localeCompare(queryString));
     }
+
+    if ((req.isAuthenticated() && currentUser.localeCompare(queryString) === 0) || (req.user != undefined && req.user.roles.indexOf('admin') >= 0)) {
+        next();
+    }
+    else {
+        res.send({success: false}); // TODO:
+        // res.redirect('/login');
+    }
+}
 };
