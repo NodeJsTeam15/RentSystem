@@ -1,19 +1,21 @@
-var encryption = require('../utilities/encryption');
-var books = require('../data/books');
+var books = require('../data/books'),
+    Book = require('mongoose').model('Book'),
+    User = require('mongoose').model('User'),
+    mongoosePaginate = require('mongoose-paginate');
 
 var CONTROLLER_NAME = 'books';
 
 module.exports = {
-    getBook: function(req, res, next) {
+    getAdd: function(req, res, next) {
         res.render(CONTROLLER_NAME + '/addbook', {currentUser: req.user})
     },
-    postBook: function(req, res, next) {
+    createBook: function(req, res, next) {
          var newBookData = req.body;
          newBookData.user = req.user;
 
          books.create(newBookData, function(err, user) {
              if (err) {
-                 console.log('Failed to create new book: ' + err);
+                 console.log('Failed to create a new book: ' + err);
                  return;
              }
 
@@ -23,9 +25,64 @@ module.exports = {
                      return res.send({reason: err.toString()}); // TODO
                  }
                  else {
-                     res.redirect('/');
+                     console.log('here')
+                     res.redirect({currentUser: req.user}, '/');
                  }
              })
          });
+    },
+    getBooks: function (req, res, next) {
+        var customQuery = req.query.userId ? {user: req.query.userId} : {};
+
+        if (req.query.category) {
+            customQuery['category'] = req.query.category;
+        }
+
+        var page = req.query.page ? req.query.page : 1;
+        var limit = req.query.pageSize ? req.query.pageSize : 10;
+
+
+        var sortByProperty = req.query.sortBy ? req.query.sortBy: 'price';
+0
+        var sortDir = req.query.type === 'asc' ? 1 : -1;
+        //Book.paginate(customQuery, {page: page, limit: limit, sort: sortBy}, function (err, result) {
+        //    if (err) {
+        //        console.log('Books could not be loaded: ' + err);
+        //    }
+        //
+        //    res.render('books/books', {currentUser: req.user, books: result.docs});
+        //});
+
+        var sortObject = {};
+        var stype = sortByProperty;
+        var sdir = sortDir;
+        sortObject[stype] = sdir;
+        Book
+            .find({}).sort(sortObject).skip(+limit * (page - 1)).limit(+limit)
+            .exec(function (err, books) {
+                if (err) {
+                    console.log('Get all books failed: ' + err);
+                    return;
+                }
+
+                res.render('books/books', {books: books, currentUser: req.user});
+            });
+
+        // Book.find({}, function(err, books) {
+        //     res.render('books/books', {currentUser: req.user, books: books});
+        // });
+    },
+    getLatestBooks: function (req, res, next) {
+        //Book.paginate({}, {page: 1, limit: 10}, function (err, result) {
+        //    if (err) {
+        //        console.log('Books could not be loaded: ' + err);
+        //    }
+        //
+        //    res.render('index', {currentUser: req.user, books: result.docs.reverse()});
+        //})
+        Book.find({}, function(err, books) {
+            // console.log(books);
+            res.render('index', {currentUser: req.user, books: books});
+        });
     }
-}
+};

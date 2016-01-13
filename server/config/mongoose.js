@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
     UserModel = require('../data/models/User'),
-    BookModel = require('../data/models/Book');
+    BookModel = require('../data/models/Book'),
+    OrderModel = require('../data/models/Order');
 
 module.exports = function(config) {
     mongoose.connect(config.db);
@@ -21,4 +22,5 @@ module.exports = function(config) {
 
     UserModel.init();
     BookModel.init();
+    OrderModel.init();
 };

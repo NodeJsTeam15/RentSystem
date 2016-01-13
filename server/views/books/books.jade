@@ -1,0 +1,66 @@
+extends ../shared/layout
+block main-content
+   div(class='row' ng-controller='BooksController as vm')
+      div(class='col-lg-2 col-lg-offset-1')
+         h2 Categories
+         br
+         .btn-group-vertical
+            a(href='/books?category=Crime' class='btn btn-raised btn-primary') Crime
+            a(href='/books?category=Drama' class='btn btn-raised btn-primary') Drama
+            a(href='/books?category=Thriller' class='btn btn-raised btn-primary') Thriller
+            a(href='/books?category=Romantic' class='btn btn-raised btn-primary') Romantic
+      div(class='col-lg-8')
+         h1 Books
+         .row
+            .col-md-3
+               .form-group
+                  label(class='col-md-12 control-label', for='sortby')
+                     | Sort by
+                  .col-md-12
+                     select(class='form-control', id='sortby', ng-model='vm.request.sortBy')
+                        option(value='bookname') Name
+                        option(value='price') Price
+            .col-md-3
+               .form-group
+                  label(class='col-md-12 control-label', for='type')
+                     | Type
+                  .col-md-12
+                     select(class='form-control', id='type', ng-model='vm.request.type')
+                        option(value='asc') Ascending
+                        option(value='desc') Descending
+            .col-md-2
+               .form-group
+                  label(class='col-md-12 control-label', for='pageSize')
+                     | Page size
+                  .col-md-12
+                     input(type='number', class='form-control', id='pageSize', ng-model='vm.request.pageSize')
+            .col-md-2
+               .form-group
+                  label(class='col-md-12 control-label', for='page')
+                     | Page
+                  .col-md-12
+                     input(type='number', class='form-control', id='page', ng-model='vm.request.page')
+            .col-md-2
+               .form-group
+                  br
+                  button(class='btn btn-primary btn-raised' ng-click='vm.filterProducts()') Filter
+         <br>
+         table.table.table-stripped.table-hover
+            thead
+            tr
+               th Category
+               th Name
+               th Price
+               th Image
+               th
+            tbody
+               each book in books
+                  tr
+                     td(style='vertical-align:middle')= book.category
+                     td(style='vertical-align:middle')= book.bookname
+                     td(style='vertical-align:middle')= book.price
+                     td(style='vertical-align:middle')
+                        img(src=book.image class='image_table img-rounded')
+                     td(style='vertical-align:middle')
+                        a(class='btn btn-sm',href='/cart/add?itemId='+book.id) Add To Cart
+

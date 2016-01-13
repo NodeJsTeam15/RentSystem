@@ -16,6 +16,7 @@ module.exports = function(app, config) {
     app.use(passport.initialize());
     app.use(passport.session());
     app.use(express.static(config.rootPath + '/public'));
+
     app.use(function(req, res, next) {
         if (req.session.error) {
             var msg = req.session.error;

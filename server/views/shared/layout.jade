@@ -4,7 +4,7 @@ html
         title
         link(rel="stylesheet" href="/lib/bootstrap-3.2.0/css/bootstrap.min.css")
         link(rel="stylesheet" href="/css/site.css")
-    body
+    body(ng-app="myApp" ng-cloak)
         header.nav
         .container
             .navbar-header
@@ -15,11 +15,15 @@ html
                         a(href="/") Home
                     if (currentUser)
                         li
+                            a(href="/books") Books
+                        li
                             a(href="/profile") #{currentUser.username}
                         li
                             a(href="/logout") Logout
                         li
-                            a(href="/addbook") Add New Book Offer
+                            a(href="/books/add") Add New Book Offer
+                        li
+                            a(href="/cart") Cart
                         if (currentUser.roles.indexOf('admin') > -1)
                             li
                                 a(href="/users") Users
@@ -30,7 +34,7 @@ html
                         li
                             a(href="/login") Login
 
-        .container
+        .container(ng-view)
             if (errorMessage)
                 .alert.alert-danger #{errorMessage}
 

@@ -1,0 +1,18 @@
+extends ../shared/layout
+block main-content
+    div(class='container' ng-controller='CartController as vm')
+        h1 Book
+        table.table.table-stripped.table-hover
+            thead
+            tr
+                th Category
+                th Name
+                th Price
+                th
+            tbody
+                each book in books
+                    tr
+                        td= book.category
+                        td= book.name
+                        td= book.price
+                        td(class='btn',ng-click='vm.addToCart()') Add To Cart

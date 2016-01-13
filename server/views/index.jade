@@ -1,4 +1,18 @@
 extends shared/layout
 block main-content
-    h1(class="jumbotron") Welcome to Book Rent System
-
+    h1(class="jumbotron text-center") Welcome to Book Rent System
+    table.table
+        thead.thead-default
+            tr
+                th Category
+                th Name
+                th Price
+                th
+        tbody
+            each book in books
+                tr
+                    td= book.category
+                    td= book.bookname
+                    td= book.price
+                    td
+                        a(class='btn btn-sm',href='/cart/add?itemId='+book.id) Add To Cart

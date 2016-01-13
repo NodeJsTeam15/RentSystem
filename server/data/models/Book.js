@@ -1,24 +1,18 @@
 var mongoose = require('mongoose'),
-    encryption = require('../../utilities/encryption');
+    mongoosePaginate = require('mongoose-paginate');
 
 module.exports.init = function() {
     var bookSchema = mongoose.Schema({
         bookname: { type: String, require: true },
         description: String,
         price:  { type: String, require: true },
-        user: {}
+        category: String,
+        image: String,
+        timesBought: Number,
+        user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}
     });
 
-    //bookSchema.method({
-    //    authenticate: function(password) {
-    //        if (encryption.generateHashedPassword(this.salt, password) === this.hashPass) {
-    //            return true;
-    //        }
-    //        else {
-    //            return false;
-    //        }
-    //    }
-    //});
+    bookSchema.plugin(mongoosePaginate);
 
     var Book = mongoose.model('Book', bookSchema);
 };
