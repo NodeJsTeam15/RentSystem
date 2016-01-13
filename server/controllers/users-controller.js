@@ -6,11 +6,23 @@ var encryption = require('../utilities/encryption'),
 var CONTROLLER_NAME = 'users';
 
 module.exports = {
-    getRegister: function(req, res, next) {
+    getRegister: function (req, res, next) {
         res.render(CONTROLLER_NAME + '/register')
     },
-    postRegister: function(req, res, next) {
+    postRegister: function (req, res, next) {
         var newUserData = req.body;
+
+        if (!newUserData.password) {
+            req.session.error = 'Password is required';
+            res.redirect('/register');
+            return;
+        }
+
+        if (newUserData.password.indexOf(' ') > -1) {
+            req.session.error = 'Password cannot contain empty space.';
+            res.redirect('/register');
+            return;
+        }
 
         if (newUserData.password != newUserData.confirmPassword) {
             req.session.error = 'Passwords do not match!';
@@ -19,7 +31,7 @@ module.exports = {
         else {
             newUserData.salt = encryption.generateSalt();
             newUserData.hashPass = encryption.generateHashedPassword(newUserData.salt, newUserData.password);
-            users.create(newUserData, function(err, user) {
+            users.create(newUserData, function (err, user) {
                 if (err) {
                     req.session.error = 'Failed to register the user. ' + err.errors.username.message;
                     console.dir('Failed to register new user: ' + err);
@@ -27,7 +39,7 @@ module.exports = {
                     return;
                 }
 
-                req.logIn(user, function(err) {
+                req.logIn(user, function (err) {
                     if (err) {
                         res.status(400);
                         return res.send({reason: err.toString()}); // TODO
@@ -39,7 +51,7 @@ module.exports = {
             });
         }
     },
-    getLogin: function(req, res, next) {
+    getLogin: function (req, res, next) {
         res.render(CONTROLLER_NAME + '/login');
     },
     getAllUsers: function (req, res, next) {
@@ -66,13 +78,13 @@ module.exports = {
                 } else {
                     console.log(result);
 
-                     res.render(CONTROLLER_NAME +  '/all-users', {users: result, currentUser: req.user});
+                    res.render(CONTROLLER_NAME + '/all-users', {users: result, currentUser: req.user});
                 }
             });
     },
     getById: function (req, res, next) {
         User
-            .findOne({ _id: req.params.id })
+            .findOne({_id: req.params.id})
             .select('_id username firstName lastName roles')
             .exec(function (err, result) {
                 if (err) {
@@ -83,7 +95,7 @@ module.exports = {
 
                 // res.status(200);
                 // res.send(result);
-                res.render(CONTROLLER_NAME +  '/detailed-user', {viewedUser: result, currentUser: req.user});
+                res.render(CONTROLLER_NAME + '/detailed-user', {viewedUser: result, currentUser: req.user});
             });
     },
     getCart: function (req, res, next) {
