@@ -21,6 +21,10 @@ block main-content
                td(class='text-center') Last Name
                td(class='text-center')
                   = viewedUser.lastName
+            tr
+               td(class='text-center') Admin
+               td(class='text-center')
+                  = viewedUser.isAdmin
    div(class="row")
-      div(class="col-md-3 pull-left")
+      div(class="col-md-2 pull-left")
          a(href=viewedUser._id + "/edit" class='btn btn-primary col-md-12') Edit

@@ -93,6 +93,13 @@ module.exports = {
                     return;
                 }
 
+                if(result.roles.indexOf('admin') > -1){
+                    result.isAdmin = 'yes';
+                }else
+                {
+                    result.isAdmin = 'no'
+                }
+
                 // res.status(200);
                 // res.send(result);
                 res.render(CONTROLLER_NAME + '/detailed-user', {viewedUser: result, currentUser: req.user});
@@ -199,32 +206,80 @@ module.exports = {
                     return;
                 }
 
+                if(result.roles.indexOf('admin') > -1){
+                    result.isAdmin = 'yes';
+                }
+
                 res.render(CONTROLLER_NAME + '/detailed-user-for-edit', {viewedUser: result, currentUser: req.user});
             });
     },
     postEditUser: function(req, res, next) {
 
-             var updatedUserData = {
+        var updatedUserData = {}
+             updatedUserData = {
                 firstName: req.body.firstName,
-                lastName: req.body.lastName
+                lastName: req.body.lastName,
+                isAdmin: req.body.isAdmin
             };
 
-            User.findById(req.params.id, function(err, user) {
-                if (!user)
-                    return next(new Error('Could not load Document'));
-                else {
-                    console.log(updatedUserData);
+        var value = updatedUserData.isAdmin == "send" ? "admin" : "";
 
-                    user.firstName = updatedUserData.firstName;
-                    user.lastName = updatedUserData.lastName;
 
-                    console.log(user);
-
-                    user.save(function(err) {
-                        res.redirect('/users/' + req.params.id)
-                    });
+        if(value==="admin"){
+            users.updateUser({_id: req.params.id},  {firstName: updatedUserData.firstName, lastName: updatedUserData.lastName, $push: {roles: value}}, function (err, user) {
+                if (err) {
+                    console.log("ERROR", err);
+                    req.session.error = 'Unable to remove book';
                 }
+
+                res.redirect('/users/' + req.params.id)
             });
+        } else {
+            users.updateUser({_id: req.params.id},  {firstName: updatedUserData.firstName, lastName: updatedUserData.lastName, $pop: {roles: "admin"}}, function (err, user) {
+                if (err) {
+                    console.log("ERROR", err);
+                    req.session.error = 'Unable to remove book';
+                }
+
+                res.redirect('/users/' + req.params.id)
+            });
+        }
+
+
+
+
+
+            // User.findById(req.params.id, function(err, user) {
+            //     if (!user)
+            //         return next(new Error('Could not load Document'));
+            //     else {
+            //
+            //
+            //
+            //         console.log('here' + updatedUserData.isAdmin);
+            //         console.log('here' + updatedUserData.firstName);
+            //
+            //         if(updatedUserData.isAdmin == "true"){
+            //             user.roles.push('admin');
+            //         }
+            //         if(updatedUserData.isAdmin=="false") {
+            //             user.roles = [];
+            //         }
+            //
+            //
+            //
+            //
+            //
+            //         user.firstName = updatedUserData.firstName;
+            //         user.lastName = updatedUserData.lastName;
+            //
+            //         console.log(user);
+            //
+            //         user.save(function(err) {
+            //             res.redirect('/users/' + req.params.id)
+            //         });
+            //     }
+            // });
         }
 
 };

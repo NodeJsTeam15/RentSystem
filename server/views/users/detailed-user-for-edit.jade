@@ -10,10 +10,10 @@ block main-content
                   label(class='col-md-2 control-label', for='user-id')
                      | USER ID
                   .col-md-10
-                     input(type='text', class='form-control', id='user-id', disabled="disabled", value=viewedUser._id)
+                     input(type='text', class='form-control', id='user-id', disabled="disabled", value=viewedUser._id, name="userId")
                .form-group
                   label(class='col-md-2 control-label', for='username')
-                     | USER ID
+                     | Username
                   .col-md-10
                      input(type='text', class='form-control', id='username', disabled="disabled", value=viewedUser.username)
                .form-group
@@ -26,6 +26,15 @@ block main-content
                      | Last Name
                   .col-md-10
                      input(type='text', class='form-control', id='last-name', value=viewedUser.lastName, name="lastName")
+               if(viewedUser.isAdmin)
+                  .form-group
+                     label(class='col-md-2 control-label', for='is-admin')
+                        | Last Name
+                     .col-md-10
+                        if(viewedUser.isAdmin)
+                           input(type='checkbox', class='form-control', id='is-admin', checked, value="true", name="isAdmin")
+                        else
+                           input(type='checkbox', class='form-control', id='is-admin', value="send", name="isAdmin")
                .form-group
                   div(class='col-md-10 col-md-offset-2')
                      button(class='btn btn-primary', type='reset') Reset
