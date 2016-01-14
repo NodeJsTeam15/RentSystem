@@ -34,6 +34,9 @@ module.exports = function(app) {
     app.get('/cart/remove', controllers.users.getRemoveFromCartConfirmation);
 
     app.get('/', controllers.books.getLatestBooks);
+    app.get('/unauthorized', function(req, res, next){
+        res.render('unauthorized', {currentUser: req.user});
+    });
 
     //app.get('*', function(req, res) {
     //    res.render('index', {currentUser: req.user});

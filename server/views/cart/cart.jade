@@ -14,7 +14,7 @@ block main-content
                 each book in cart
                     tr
                         td= book.category
-                        td= book.name
+                        td= book.bookname
                         td= book.price
                         td
                             a(class='btn',href='/cart/remove?itemId=' + book.id) Remove From Cart

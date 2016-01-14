@@ -47,7 +47,7 @@ module.exports = {
             }
             else {
                 res.status(401);
-                res.send("Not authorized for this content");
+                res.redirect('/unauthorized');
             }
         };
     },
@@ -69,8 +69,7 @@ module.exports = {
         next();
     }
     else {
-        res.send({success: false}); // TODO:
-        // res.redirect('/login');
+        res.redirect('/unauthorized');
     }
 }
 };
