@@ -1,20 +1,37 @@
 extends ../shared/layout
 
 block main-content
-    form(action="/register" method="post")
-        label(for="username") Username
-        input(id="username" class="form-control" type="text" name="username" placeholder="Username")
-        br
-        label(for="password") Password
-        input(id="password" class="form-control" type="password" name="password" placeholder="Password")
-        br
-        label(for="confirm-password") Confirm Password
-        input(id="confirm-password" class="form-control" type="password" name="confirmPassword" placeholder="Confirm password")
-        br
-        label(for="first-name") First Name
-        input(id="first-name" class="form-control" type="text" name="firstName" placeholder="First Name")
-        br
-        label(for="last-name") Last Name
-        input(id="last-name" class="form-control" type="text" name="lastName" placeholder="Last Name")
-        br
-        input(type="submit" class="btn btn-lg" value="Register")
+    .container
+        div(class='col-md-8 col-md-offset-2')
+            form(class='form-horizontal' action="/register" method="post" name="register")
+                fieldset
+                    legend
+                        | Register
+                    .form-group
+                        label(class='col-md-2 control-label', for='username')
+                            | Username
+                        .col-md-10
+                            input(type='text', class='form-control', placeholder='Username', id='username', name="username" )
+                    .form-group
+                        label(class='col-md-2 control-label', for='password')
+                            | Password
+                        .col-md-10
+                            input(type='password', class='form-control', placeholder='Password', id='password', name="password")
+                    .form-group
+                        label(class='col-md-2 control-label', for='confirm-password')
+                            | Confirm Password
+                        .col-md-10
+                            input(type='password', class='form-control', placeholder='confirm-password', id='confirm-password', name="confirmPassword")
+                    .form-group
+                        label(class='col-md-2 control-label', for='first-name')
+                            | First name
+                        .col-md-10
+                            input(type='text', class='form-control', placeholder='First name', id='first-name', name="firstName")
+                    .form-group
+                        label(class='col-md-2 control-label', for='last-name')
+                            | Last name
+                        .col-md-10
+                            input(type='text', class='form-control', placeholder='Last name', id='last-name', name="lastName")
+                    .form-group
+                        div(class='col-md-10 col-md-offset-2 pull-left')
+                            input(type="submit" class="btn btn-lg" value="Register")
