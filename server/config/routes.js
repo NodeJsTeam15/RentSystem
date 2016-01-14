@@ -22,6 +22,9 @@ module.exports = function(app) {
     // Books
 
     app.get('/books', controllers.books.getBooks);
+    app.get('/books/add', controllers.books.getAdd);
+    app.post('/books/add', controllers.books.createBook);
+    app.get('/books/:id', auth.isAuthenticated, controllers.books.getById);
 
     app.get('/cart',  controllers.users.getCart);
     app.get('/cart/add', controllers.users.getAddCartConfirmation);
@@ -31,9 +34,6 @@ module.exports = function(app) {
     app.get('/cart/remove', controllers.users.getRemoveFromCartConfirmation);
 
     app.get('/', controllers.books.getLatestBooks);
-
-    app.get('/books/add', controllers.books.getAdd);
-    app.post('/books/add', controllers.books.createBook);
 
     //app.get('*', function(req, res) {
     //    res.render('index', {currentUser: req.user});

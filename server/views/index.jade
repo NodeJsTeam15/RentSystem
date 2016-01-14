@@ -12,7 +12,11 @@ block main-content
             each book in books
                 tr
                     td= book.category
-                    td= book.bookname
+                    if (currentUser)
+                        td
+                            a(href="books/" + book._id)= book.bookname
+                    else
+                        td= book.bookname
                     td= book.price
                     td
                         a(class='btn btn-sm',href='/cart/add?itemId='+book.id) Add To Cart

@@ -21,6 +21,11 @@ block main-content
                   .col-md-10
                      input(type='text', class='form-control', placeholder='Name', id='name', ng-model='book.bookname' ng-required='true')
                .form-group
+                  label(class='col-md-2 control-label', for='author')
+                     | Author
+                  .col-md-10
+                     input(type='text', class='form-control', placeholder='Author', id='author', ng-model='book.author' ng-required='true')
+               .form-group
                   label(class='col-md-2 control-label', for='description')
                      | Description
                   .col-md-10
