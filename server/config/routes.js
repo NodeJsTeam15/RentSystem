@@ -16,7 +16,7 @@ module.exports = function(app) {
 
     app.get('/users/:id',auth.isAdminOrCurrentUser,controllers.users.getById);
     app.get('/users/:id/edit', auth.isAdminOrCurrentUser, controllers.users.getEditUser)
-    app.post('/users/:id/edit', controllers.users.postEditUser)
+    app.post('/users/:id/edit',auth.isAdminOrCurrentUser, controllers.users.postEditUser)
         // .delete( auth.isInRole('admin'), controllers.users.deleteUser)
         // .put( auth.isInRole('admin'), controllers.users.makeAdmin);
     // Books

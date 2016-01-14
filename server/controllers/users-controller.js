@@ -188,6 +188,28 @@ module.exports = {
             });
     },
     postEditUser: function(req, res, next) {
-        console.log(req.body);
-    }
+
+             var updatedUserData = {
+                firstName: req.body.firstName,
+                lastName: req.body.lastName
+            };
+
+            User.findById(req.params.id, function(err, user) {
+                if (!user)
+                    return next(new Error('Could not load Document'));
+                else {
+                    console.log(updatedUserData);
+
+                    user.firstName = updatedUserData.firstName;
+                    user.lastName = updatedUserData.lastName;
+
+                    console.log(user);
+
+                    user.save(function(err) {
+                        res.redirect('/users/' + req.params.id)
+                    });
+                }
+            });
+        }
+
 };
