@@ -15,11 +15,12 @@ module.exports = function(app) {
        // .put(auth.isAuthenticated, controllers.users.updateUser);
 
     app.get('/users/:id',auth.isAdminOrCurrentUser,controllers.users.getById);
-        // .post( auth.isInRole('admin'), controllers.users.updateByAdmin)
+    app.get('/users/:id/edit', auth.isAdminOrCurrentUser, controllers.users.getEditUser)
+    app.post('/users/:id/edit', controllers.users.postEditUser)
         // .delete( auth.isInRole('admin'), controllers.users.deleteUser)
         // .put( auth.isInRole('admin'), controllers.users.makeAdmin);
     // Books
-    console.log(controllers);
+
     app.get('/books', controllers.books.getBooks);
 
     app.get('/cart',  controllers.users.getCart);

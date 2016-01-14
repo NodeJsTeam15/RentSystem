@@ -187,5 +187,22 @@ module.exports = {
                     res.render('cart/cart', {currentUser: req.user, cart: user.products});
                 });
         }
+    },
+    getEditUser: function (req, res, next) {
+        User
+            .findOne({_id: req.params.id})
+            .select('_id username firstName lastName roles')
+            .exec(function (err, result) {
+                if (err) {
+                    res.status(400).send('User could not be found: ' + err);
+                    console.log('User could not be found: ' + err);
+                    return;
+                }
+
+                res.render(CONTROLLER_NAME + '/detailed-user-for-edit', {viewedUser: result, currentUser: req.user});
+            });
+    },
+    postEditUser: function(req, res, next) {
+        console.log(req.body);
     }
 };
