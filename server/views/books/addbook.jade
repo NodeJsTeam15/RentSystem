@@ -35,9 +35,6 @@ block main-content
                      | Image
                   .col-md-10
                      input(type='text', class='form-control', placeholder='Image', id='image', ng-model='book.image')
-               div(class='form-group' ng-show='book.image')
-                  .col-md-6.col-md-offset-3
-                     img(src='{{book.image}}')
                .form-group
                   div(class='col-md-10 col-md-offset-2')
                      button(class='btn btn-primary', type='reset') Cancel

@@ -25,10 +25,8 @@ block main-content
                 img(src=book.image style="width:400px" class='img-rounded')
                 if(currentUser)
         div(class='col-md-10 col-md-offset-1')
-            a.btn.btn-primary.pull-left(href='/books') Back to the shop
             if(currentUser)
                 if(!inCart)
                     div(class='btn btn-primary pull-right',ng-click='vm.addToCart()') Add To Cart
                 if(inCart)
-                    a.btn.btn-primary.pull-left(href='/cart') Back to the cart
                     div(style='vertical-align:middle' class='btn btn-primary pull-right',ng-click='vm.removeFromCart()') Remove From Cart
