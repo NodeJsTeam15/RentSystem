@@ -21,7 +21,7 @@ module.exports = function(app) {
         // .put( auth.isInRole('admin'), controllers.users.makeAdmin);
     // Books
 
-    app.get('/books', controllers.books.getBooks);
+    app.get('/books', auth.isAuthenticated, controllers.books.getBooks);
     app.get('/books/add', controllers.books.getAdd);
     app.post('/books/add', controllers.books.createBook);
     app.get('/books/:id', auth.isAuthenticated, controllers.books.getById);

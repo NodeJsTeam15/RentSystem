@@ -15,7 +15,9 @@ module.exports = {
 
          books.create(newBookData, function(err, user) {
              if (err) {
+                 req.session.error = 'Failed to create the book.' + err;
                  console.log('Failed to create a new book: ' + err);
+                 res.redirect('/register');
                  return;
              }
 

@@ -4,10 +4,10 @@ var mongoose = require('mongoose'),
 
 module.exports.init = function() {
     var bookSchema = mongoose.Schema({
-        bookname: { type: String, require: requiredMessage },
-        author: { type: String, require: requiredMessage },
+        bookname: { type: String, required: requiredMessage },
+        author: { type: String, required: requiredMessage },
         description: String,
-        price:  { type: String, require: requiredMessage },
+        price:  { type: String, required: requiredMessage },
         category: String,
         image: String,
         timesBought: Number,

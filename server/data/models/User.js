@@ -8,7 +8,7 @@ module.exports.init = function() {
     var userSchema = mongoose.Schema({
         username: {
             type: String,
-            require: '{PATH} is required',
+            required: '{PATH} is required',
             minlength: userNameMinlength,
             unique: true,
             validate: {
