@@ -135,8 +135,10 @@ module.exports = {
     },
     addItemToCart: function (req, res, next) {
         var newProductData = req.body;
+        console.log("in addItemToCart");
+        console.log(newProductData);
         newProductData.user = req.user._id;
-        usersData.updateUser({_id: req.user._id}, {$push: {"cart": newProductData.itemId}}, function (err, user) {
+        users.updateUser({_id: req.user._id}, {$push: {"cart": newProductData.itemId}}, function (err, user) {
             if (err) {
                 console.log("ERROR", err);
                 req.session.error = 'Unable to add to cart';
@@ -146,16 +148,29 @@ module.exports = {
         });
     },
     removeItemFromCart: function (req, res, next) {
-        var newProductData = req.body;
-        newProductData.user = req.user._id;
-        usersData.updateUser({_id: req.user._id}, {$pop: {"cart": newProductData.itemId}}, function (err, user) {
+        var newBookData = req.body;
+        newBookData.user = req.user._id;
+        users.updateUser({_id: req.user._id}, {$pop: {"cart": newBookData.itemId}}, function (err, user) {
             if (err) {
                 console.log("ERROR", err);
-                req.session.error = 'Unable to remove product';
+                req.session.error = 'Unable to remove book';
             }
             console.log('Updated!!!', user);
             res.redirect('/cart');
         });
+    },
+    getRemoveFromCartConfirmation: function (req, res, next) {
+        if (!req.user) {
+            res.redirect('/');
+        } else {
+            var book = req.query.itemId ? { id: req.query.itemId } : {};
+            books.getBookById(book.id, function (err, book) {
+                if (err) {
+                    console.log('Book could not be loaded: ' + err);
+                }
+                res.render('cart/bookDetails', { currentUser: req.user, book: book, inCart: true });
+            });
+        }
     },
     getCheckout: function (req, res, next) {
         if (!req.user) {

@@ -15,7 +15,9 @@ module.exports = {
 
          books.create(newBookData, function(err, user) {
              if (err) {
+                 req.session.error = 'Failed to create the book.' + err;
                  console.log('Failed to create a new book: ' + err);
+                 res.redirect('/register');
                  return;
              }
 
@@ -85,5 +87,18 @@ module.exports = {
             // console.log(books);
             res.render('index', {currentUser: req.user, books: books});
         });
+    },
+    getById: function (req, res, next) {
+        Book
+            .findOne({_id: req.params.id})
+            .exec(function (err, book) {
+                if (err) {
+                    res.status(400).send('Book could not be found: ' + err);
+                    console.log('Book could not be found: ' + err);
+                    return;
+                }
+
+                res.render(CONTROLLER_NAME + '/details', {book: book, currentUser: req.user});
+            });
     }
 };

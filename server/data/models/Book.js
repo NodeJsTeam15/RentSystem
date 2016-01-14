@@ -1,11 +1,13 @@
 var mongoose = require('mongoose'),
-    mongoosePaginate = require('mongoose-paginate');
+    mongoosePaginate = require('mongoose-paginate'),
+    requiredMessage = '{PATH} is required';
 
 module.exports.init = function() {
     var bookSchema = mongoose.Schema({
-        bookname: { type: String, require: true },
+        bookname: { type: String, required: requiredMessage },
+        author: { type: String, required: requiredMessage },
         description: String,
-        price:  { type: String, require: true },
+        price:  { type: String, required: requiredMessage },
         category: String,
         image: String,
         timesBought: Number,

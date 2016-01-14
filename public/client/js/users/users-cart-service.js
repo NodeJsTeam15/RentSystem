@@ -4,11 +4,11 @@
     function cartService(data) {
 
         function addToCart(productId) {
-            return data.post('/cart/add', productId);
+            return data.post('cart/add', productId);
         }
 
         function removeFromCart(productId) {
-            return data.post('/cart/remove', productId);
+            return data.post('cart/remove', productId);
         }
 
         return {
