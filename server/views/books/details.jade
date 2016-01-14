@@ -1,0 +1,10 @@
+extends ../shared/layout
+block main-content
+    .row.jumbotron
+        .col-md-offset-2.col-md-3
+            img(src="#{book.image}" alt="#{book.bookname}")
+        .col-md-4.text-center
+            h1 #{book.bookname}
+            p by #{book.author}
+            p #{book.description}
+            p #{book.price}
