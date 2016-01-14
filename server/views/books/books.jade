@@ -57,7 +57,8 @@ block main-content
                each book in books
                   tr
                      td(style='vertical-align:middle')= book.category
-                     td(style='vertical-align:middle')= book.bookname
+                     td(style='vertical-align:middle')
+                        a(href="books/" + book._id)= book.bookname
                      td(style='vertical-align:middle')= book.price
                      td(style='vertical-align:middle')
                         img(src=book.image class='image_table img-rounded')
