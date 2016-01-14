@@ -9,7 +9,7 @@ module.exports.init = function() {
         description: String,
         price:  { type: String, required: requiredMessage },
         category: String,
-        image: String,
+        image: {type: String, default: "http://www.twinkl.co.uk/images/default_book_image.gif"},
         timesBought: Number,
         user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'}
     });

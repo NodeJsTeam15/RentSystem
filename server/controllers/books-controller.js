@@ -98,6 +98,8 @@ module.exports = {
                     return;
                 }
 
+                console.log(book);
+
                 res.render(CONTROLLER_NAME + '/details', {book: book, currentUser: req.user});
             });
     }
